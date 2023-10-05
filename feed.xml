@@ -1,2 +1,61 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2023-10-04T15:13:22+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">blank</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
-</subtitle><entry><title type="html">Displaying External Posts on Your al-folio Blog</title><link href="http://localhost:4000/blog/2022/displaying-external-posts-on-your-al-folio-blog/" rel="alternate" type="text/html" title="Displaying External Posts on Your al-folio Blog" /><published>2022-04-23T23:20:09+00:00</published><updated>2022-04-23T23:20:09+00:00</updated><id>http://localhost:4000/blog/2022/displaying-external-posts-on-your-al-folio-blog</id><content type="html" xml:base="http://localhost:4000/blog/2022/displaying-external-posts-on-your-al-folio-blog/"><![CDATA[]]></content><author><name></name></author></entry></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2023-10-05T14:59:20+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">blank</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
+</subtitle><entry><title type="html">Async 사용법</title><link href="http://localhost:4000/blog/2023/async/" rel="alternate" type="text/html" title="Async 사용법" /><published>2023-10-05T10:17:00+00:00</published><updated>2023-10-05T10:17:00+00:00</updated><id>http://localhost:4000/blog/2023/async</id><content type="html" xml:base="http://localhost:4000/blog/2023/async/"><![CDATA[<h2 id="비동기">비동기</h2>
+<p>비동기 처리는 쉽게 도입이 가능하고 사용자 경험을 개선할 수 있다. <br /> 
+실제로 내가 개발하는 프로젝트에서 비동기 처리를 통해 배우게 된 점을 토대로 정리한다.<br /> <br /> <br /></p>
+
+<h3 id="비동기의-장점">비동기의 장점</h3>
+<p>병렬 실행: 백그라운드에서 이메일 발송과 같은 오래 걸리는 작업을 비동기적으로 처리하면, <br />
+다른 작업과 병렬로 실행할 수 있다. <br /> <br />
+사용자 경험 개선: 비동기 처리를 통해 API 호출 및 백그라운드 작업을 동시에 진행하므로 <br />
+사용자는 오래 걸리는 작업의 완료를 기다리지 않아도 되며 <br />
+이로써 응답 시간이 크게 단축되어 사용자의 불편을 최소화할 수 있다. <br />
+<br /> <br /></p>
+
+<h3 id="비동기-적용-전-고민">비동기 적용 전 고민</h3>
+<p>이번 연도 하반기부터 이메일 인증 기능을 요구사항에 따라 개발하게 되었다. <br />
+기존 이메일 발송 버튼을 클릭 시 버튼 비활성화 시간이 해제되는 데까지 약 4~5초정도 걸렸고  <br />
+그 시간 동안 유저는 다른 정보를 입력하기보다는 버튼이 멈추거나 대기하게 될 수 밖에 없을 것이었다.<br /></p>
+
+<p>이를 해결하기 위해 프론트단에서 유저가 api 통신에 걸리는 시간을 인지할 수 있도록 토스트 메시지를 추가해 보완하였다. <br /> <br /> <br /></p>
+
+<h3 id="비동기-적용">비동기 적용</h3>
+<p>내가 기존에 개발한 화면 뿐 아니라 팀원들이 추가로 개발한 기능에 이메일 인증 기능이 <br />
+추가되어 속도에 대한 문제점이 더 크게 다가왔던 점 때문에 비동기를 적용하게 되었다. <br /> <br />
+팀원분께서 설정하였고 pr 코드를 확인해 보니 설정한 것은 아래와 같다.<br /> <br /></p>
+
+<hr />
+
+<p><br /></p>
+
+<h2 data-toc-text="간단한 설정 방법" id="간단한-설정-방법">간단한 설정 방법</h2>
+<p>아무런 설정을 하지 않는다는 가정하에 아래처럼 설정할 수 있다. <br />
+첫째, 메인 애플리케이션 클래스에 @EnableAsync 추가</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  @EnableAsync
+  @SpringBootApplication
+  public class MyApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(MyApplication.class, args);
+    }
+  }
+</code></pre></div></div>
+<p>둘째, 비동기 처리하고자 하는 메소드에 @Async 추가</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  @Async
+    public void doAsyncTask() {
+        // 비동기 작업을 수행
+        try {...
+        }
+        
+        
+</code></pre></div></div>
+
+<p><br /> <br /></p>
+
+<hr />
+
+<h2 data-toc-text="스레드풀 설정을 통한 방법" id="스레드풀-설정을-통한-방법">스레드풀 설정을 통한 방법</h2>
+
+<h2 id="비동기-적용-후">비동기 적용 후</h2>
+
+<p>참고자료 <a href="https://www.youtube.com/watch?v=HKlUvCv9hvA&amp;t=1429s">Async &amp; Spring</a></p>]]></content><author><name></name></author><category term="async" /><category term="spring" /><category term="java" /><summary type="html"><![CDATA[an example of a blog post with table of contents on a sidebar]]></summary></entry><entry><title type="html">Displaying External Posts on Your al-folio Blog</title><link href="http://localhost:4000/blog/2022/displaying-external-posts-on-your-al-folio-blog/" rel="alternate" type="text/html" title="Displaying External Posts on Your al-folio Blog" /><published>2022-04-23T23:20:09+00:00</published><updated>2022-04-23T23:20:09+00:00</updated><id>http://localhost:4000/blog/2022/displaying-external-posts-on-your-al-folio-blog</id><content type="html" xml:base="http://localhost:4000/blog/2022/displaying-external-posts-on-your-al-folio-blog/"><![CDATA[]]></content><author><name></name></author></entry></feed>
