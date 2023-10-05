@@ -6,6 +6,8 @@ description: an example of a blog post with table of contents on a sidebar
 categories: sample-posts toc sidebar
 giscus_comments: true
 related_posts: false
+
+[//]: # (published: true)
 published: false
 toc:
   sidebar: left
